@@ -11,7 +11,7 @@ export default function LoginForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push("/halamantransisi");
+    router.push("/transisi");
   };
 
   return (
