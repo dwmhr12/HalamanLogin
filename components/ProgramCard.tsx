@@ -11,6 +11,7 @@ interface ProgramCardProps {
   href?: string;
   color?: string;
   locked?: boolean;
+  iconSize?: number;
 }
 
 export default function ProgramCard({
@@ -21,6 +22,7 @@ export default function ProgramCard({
   href = "#",
   color = "#0e53e4",
   locked = false,
+  iconSize = 36,
 }: ProgramCardProps) {
   return (
     <div className="relative w-72 rounded-3xl bg-white pb-6 shadow-xl">
@@ -32,6 +34,13 @@ export default function ProgramCard({
           fill
           className={`object-cover ${locked ? "grayscale" : ""}`}
         />
+        {/* TINT WARNA DI SELURUH GAMBAR - efek duotone sesuai warna kartu */}
+        {!locked && (
+          <div
+            className="pointer-events-none absolute inset-0 mix-blend-color"
+            style={{ backgroundColor: color, opacity: 0.55 }}
+          />
+        )}
         {/* GRADASI BLUR KE PUTIH - transisi halus lewat warna ke body kartu */}
         <div
           className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-white"
@@ -42,10 +51,10 @@ export default function ProgramCard({
           }}
         />
 
-        {/* BADGE GEMBOK POJOK KANAN ATAS */}
+        {/* BADGE POJOK KANAN ATAS */}
         {locked && (
-          <div className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-black/40 backdrop-blur-sm">
-            <Lock className="h-3.5 w-3.5 text-white" />
+          <div className="absolute right-3 top-3 rounded-full bg-black/50 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+            Terkunci
           </div>
         )}
       </div>
@@ -65,9 +74,10 @@ export default function ProgramCard({
             <Image
               src={icon}
               alt=""
-              width={36}
-              height={36}
-              className="h-9 w-9 object-contain"
+              width={iconSize}
+              height={iconSize}
+              className="object-contain"
+              style={{ width: iconSize, height: iconSize }}
             />
           )}
         </div>
@@ -91,9 +101,15 @@ export default function ProgramCard({
         </p>
 
         {locked ? (
-          <div className="mx-auto mt-5 flex h-11 w-11 items-center justify-center rounded-full bg-slate-300 text-white">
-            <Lock className="h-5 w-5" />
-          </div>
+          <>
+            <div className="mx-auto mt-5 flex w-fit items-center gap-1.5 rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-400">
+              <Lock className="h-3.5 w-3.5" />
+              Terkunci
+            </div>
+            <p className="mt-2 text-xs text-slate-400">
+              Berlangganan untuk lihat
+            </p>
+          </>
         ) : (
           <a
             href={href}

@@ -1,7 +1,8 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { CircleHelp, ChevronDown } from "lucide-react";
+import { CircleHelp, ChevronDown, Sparkles, ArrowRight } from "lucide-react";
 import ProgramCard from "./ProgramCard";
 
 // Logo partner/program yang tampil di header (versi biru, untuk background putih).
@@ -32,10 +33,31 @@ const partnerLogos = [
   },
 ];
 
+// Ganti sesuai data user yang login (misal dari session/auth context)
+const userName = "Rifky";
+
 export default function WelcomeScreen() {
+  const programSectionRef = useRef<HTMLElement>(null);
+
+  const handleScrollDown = () => {
+    programSectionRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  // Auto-scroll otomatis ke daftar program beberapa detik setelah halaman dibuka
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handleScrollDown();
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <main className="relative min-h-dvh w-full flex flex-col overflow-hidden">
-      {/* HEADER */}
+    <main className="relative min-h-dvh w-full flex flex-col overflow-hidden bg-[#f6f8fb]">
+      {/* HEADER - tidak diubah */}
       <header className="relative z-20 w-full h-[88px] shrink-0 bg-white flex items-center justify-between gap-4 px-6 sm:px-10 py-0 shadow-[0_4px_16px_rgba(15,23,42,0.08)]">
         <Image
           src="/logo-schoters.png"
@@ -68,10 +90,7 @@ export default function WelcomeScreen() {
             Butuh Bantuan?
           </button>
 
-          <button
-            type="button"
-            className="flex items-center gap-1.5"
-          >
+          <button type="button" className="flex items-center gap-1.5">
             <Image
               src="/Mike.jpg"
               alt="Profil"
@@ -84,33 +103,56 @@ export default function WelcomeScreen() {
         </div>
       </header>
 
-      {/* AREA BACKGROUND FULL LAYAR (sisa tinggi setelah header) */}
-      <div className="relative flex-1 w-full overflow-hidden">
+      {/* BANNER BIRU - sapaan + judul "Pilih Programmu" */}
+      {/* Tinggi tetap (bukan ikut aspect-ratio penuh gambar), object-bottom supaya
+          lengkungan putih di bawah gambar selalu ikut kelihatan utuh.
+          Tinggi sudah dinaikkan dari h-[280px]/[320px]/[340px] menjadi h-[360px]/[420px]/[460px]. */}
+      <section className="relative z-10 -mt-24 w-full h-[360px] sm:h-[420px] lg:h-[460px] overflow-hidden">
         <Image
-          src="/Layar3Background(4).png"
-          alt="Background Schoters"
+          src="/halaman3KecilAbu.png"
+          alt=""
           fill
           priority
-          className="object-cover object-[center_0%]"
+          className="object-cover object-top"
         />
 
-        {/* JUDUL - ditaruh di atas gambar background */}
-        <div className="absolute left-6 top-8 z-20 sm:left-20">
-          <h2 className="text-3xl font-extrabold leading-snug text-[#052e67] sm:text-4xl">
-            Pilih <span className="text-[#129cfc]">Programmu</span>
-          </h2>
-          <p className="mt-2 max-w-md text-sm text-slate-600 sm:text-base">
-            Pilih program yang sesuai dengan tujuanmu dan mulai explore sekarang!
+        <div className="relative h-full max-w-2xl px-6 sm:px-20 flex flex-col justify-center">
+          <p className="text-lg font-medium text-white/85 sm:text-xl">
+            Welcome back! 👋
+          </p>
+          <h1 className="mt-1 whitespace-nowrap text-4xl font-extrabold leading-snug text-white sm:text-5xl lg:text-6xl">
+            Pilih <span className="text-[#5ec1ff]">Programmu</span>
+          </h1>
+          <p className="mt-3 max-w-md text-lg text-white/80 sm:text-xl">
+            Pilih program yang sesuai dengan tujuanmu dan mulai explore
+            sekarang!
           </p>
         </div>
 
-        {/* GRID 4 KARTU PROGRAM - full lebar, tanpa sisa ruang kosong */}
-        <div className="absolute inset-x-6 top-36 z-20 flex justify-between gap-4 sm:inset-x-20 sm:top-40">
+        {/* TOMBOL SCROLL KE BAWAH - di lengkungan banner */}
+        <button
+          type="button"
+          onClick={handleScrollDown}
+          aria-label="Scroll ke daftar program"
+          className="group absolute bottom-6 left-1/2 z-20 flex h-10 w-10 -translate-x-1/2 animate-bounce items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition hover:bg-white/25 sm:bottom-8"
+        >
+          <ChevronDown className="h-5 w-5" />
+        </button>
+      </section>
+
+      {/* AREA PUTIH - daftar program */}
+      <section
+        ref={programSectionRef}
+        className="relative z-10 flex-1 w-full bg-[#f6f8fb] px-6 pt-2 pb-8 sm:px-20 sm:pt-4 sm:pb-10"
+      >
+        {/* GRID 4 KARTU PROGRAM */}
+        <div className="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <ProgramCard
             image="/BG-SA.png"
             icon="/icon1.png"
             title="Study Abroad Academy"
             description="Program bimbingan intensif untuk yang ingin S1/S2/S3 di luar negeri"
+            iconSize={44}
           />
           <ProgramCard
             image="/BG-SA.png"
@@ -124,7 +166,7 @@ export default function WelcomeScreen() {
             image="/BG-SA.png"
             icon="/icon3.png"
             title="Alta Global School (AGS)"
-            description="Sekkolah PAUD-SMA Online/Hybrid dengan kurikulum nasional dan internasional"
+            description="Sekolah PAUD-SMA Online/Hybrid dengan kurikulum nasional dan internasional"
             color="#6a53e6"
           />
           <ProgramCard
@@ -135,7 +177,36 @@ export default function WelcomeScreen() {
             color="#fc7f05"
           />
         </div>
-      </div>
+
+        {/* BAR "BELUM MENEMUKAN PROGRAM?" */}
+        <div className="relative mt-10 flex flex-col items-center justify-between gap-4 overflow-hidden rounded-2xl bg-gradient-to-r from-[#0b2f8f] via-[#0e53e4] to-[#129cfc] px-6 py-5 shadow-[0_10px_30px_rgba(14,83,228,0.35)] sm:flex-row sm:px-8">
+          {/* aksen bulat dekoratif */}
+          <div className="pointer-events-none absolute -right-10 -top-16 h-40 w-40 rounded-full bg-white/10" />
+          <div className="pointer-events-none absolute -bottom-16 left-1/3 h-40 w-40 rounded-full bg-white/10" />
+
+          <div className="relative flex items-center gap-3 text-white">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15">
+              <Sparkles className="h-4.5 w-4.5 text-white" />
+            </span>
+            <span>
+              <span className="block font-semibold">
+                Belum menemukan program yang kamu cari?
+              </span>
+              <span className="block text-sm text-white/80">
+                Jelajahi paket berlangganan kami dan temukan lebih banyak
+                pilihan program.
+              </span>
+            </span>
+          </div>
+          <button
+            type="button"
+            className="relative flex shrink-0 items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#0e53e4] transition hover:bg-white/90"
+          >
+            Jelajahi Paket
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
+      </section>
     </main>
   );
 }
