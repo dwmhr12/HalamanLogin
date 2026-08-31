@@ -50,7 +50,7 @@ export default function WelcomeScreen() {
   useEffect(() => {
     const timer = setTimeout(() => {
       handleScrollDown();
-    }, 2000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
