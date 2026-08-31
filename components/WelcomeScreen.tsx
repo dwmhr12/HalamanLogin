@@ -87,7 +87,7 @@ export default function WelcomeScreen() {
       {/* AREA BACKGROUND FULL LAYAR (sisa tinggi setelah header) */}
       <div className="relative flex-1 w-full overflow-hidden">
         <Image
-          src="/layar3Background(4).png"
+          src="/Layar3Background(4).png"
           alt="Background Schoters"
           fill
           priority
