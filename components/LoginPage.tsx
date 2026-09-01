@@ -72,7 +72,10 @@ export default function LoginPage() {
           lebar layar — ini yang bikin dulu kepotong/scroll di laptop pendek. */}
       <section className="flex-1 min-h-0 overflow-hidden bg-[#052e67] flex items-center">
         <div className="mx-auto w-full lg:h-full max-w-[1400px] px-4 sm:px-8 lg:px-12">
-          <div className="flex flex-col lg:flex-row lg:h-full items-center gap-[min(4vh,2.5rem)] lg:gap-10">
+          <div
+            className="flex flex-col lg:flex-row lg:h-full items-center gap-[min(4vh,2.5rem)] lg:gap-10"
+            style={{ transform: "translateX(clamp(0px, 2.5vw, 2.75rem))" }}
+          >
             {/* Ilustrasi */}
             {/* Dulu box-nya dipaksa aspect-square (1:1), padahal gambar aslinya
                 lebih landscape -> banyak ruang kotak yang kebuang jadi spasi
