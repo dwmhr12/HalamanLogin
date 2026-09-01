@@ -57,14 +57,16 @@ export default function WelcomeScreen() {
 
   return (
     <main className="relative min-h-dvh w-full flex flex-col overflow-hidden bg-[#f6f8fb]">
-      {/* HEADER - tidak diubah */}
-      <header className="relative z-20 w-full h-[88px] shrink-0 bg-white flex items-center justify-between gap-4 px-6 sm:px-10 py-0 shadow-[0_4px_16px_rgba(15,23,42,0.08)]">
+      {/* HEADER - tinggi TETAP 88px di semua ukuran layar (sengaja, jangan diubah jadi
+          responsif per-breakpoint) karena section banner di bawah pakai -mt-24 yang
+          perhitungannya bergantung pada tinggi header ini konsisten. */}
+      <header className="relative z-20 w-full h-[88px] shrink-0 bg-white flex items-center justify-between gap-3 sm:gap-4 px-4 sm:px-6 lg:px-10 py-0 shadow-[0_4px_16px_rgba(15,23,42,0.08)]">
         <Image
           src="/logo-schoters.png"
           alt="Schoters by Ruangguru"
           width={220}
           height={62}
-          className="h-16 w-auto shrink-0 ml-8 sm:ml-12"
+          className="h-11 sm:h-14 lg:h-16 w-auto shrink-0 lg:ml-8 xl:ml-12"
           priority
         />
 
@@ -81,13 +83,13 @@ export default function WelcomeScreen() {
           ))}
         </div>
 
-        <div className="flex items-center gap-6 shrink-0 -translate-x-6">
+        <div className="flex items-center gap-3 lg:gap-6 shrink-0 lg:-translate-x-6">
           <button
             type="button"
-            className="flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-200 -translate-x-4"
+            className="flex items-center gap-2 rounded-full bg-slate-100 px-3 sm:px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-200 lg:-translate-x-4"
           >
             <CircleHelp className="h-4 w-4" />
-            Butuh Bantuan?
+            <span className="hidden sm:inline">Butuh Bantuan?</span>
           </button>
 
           <button type="button" className="flex items-center gap-1.5">
@@ -96,7 +98,7 @@ export default function WelcomeScreen() {
               alt="Profil"
               width={36}
               height={36}
-              className="h-9 w-9 rounded-full object-cover"
+              className="h-8 w-8 sm:h-9 sm:w-9 rounded-full object-cover"
             />
             <ChevronDown className="h-4 w-4 text-slate-500" />
           </button>
@@ -104,9 +106,6 @@ export default function WelcomeScreen() {
       </header>
 
       {/* BANNER BIRU - sapaan + judul "Pilih Programmu" */}
-      {/* Tinggi tetap (bukan ikut aspect-ratio penuh gambar), object-bottom supaya
-          lengkungan putih di bawah gambar selalu ikut kelihatan utuh.
-          Tinggi sudah dinaikkan dari h-[280px]/[320px]/[340px] menjadi h-[360px]/[420px]/[460px]. */}
       <section className="relative z-10 -mt-24 w-full h-[360px] sm:h-[420px] lg:h-[460px] overflow-hidden">
         <Image
           src="/halaman3KecilAbu.png"
@@ -117,13 +116,15 @@ export default function WelcomeScreen() {
         />
 
         <div className="relative h-full max-w-2xl px-6 sm:px-20 flex flex-col justify-center">
-          <p className="text-lg font-medium text-white/85 sm:text-xl">
+          <p className="text-base sm:text-lg font-medium text-white/85 sm:text-xl">
             Welcome back! 👋
           </p>
-          <h1 className="mt-1 whitespace-nowrap text-4xl font-extrabold leading-snug text-white sm:text-5xl lg:text-6xl">
+          {/* whitespace-nowrap DIHAPUS - dulu ini beresiko bikin teks keluar layar
+              di HP kecil karena dipaksa satu baris tanpa peduli lebar layar */}
+          <h1 className="mt-1 text-3xl font-extrabold leading-snug text-white sm:text-5xl lg:text-6xl">
             Pilih <span className="text-[#5ec1ff]">Programmu</span>
           </h1>
-          <p className="mt-3 max-w-md text-lg text-white/80 sm:text-xl">
+          <p className="mt-3 max-w-md text-base text-white/80 sm:text-lg lg:text-xl">
             Pilih program yang sesuai dengan tujuanmu dan mulai explore
             sekarang!
           </p>

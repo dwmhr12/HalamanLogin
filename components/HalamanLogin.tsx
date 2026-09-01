@@ -34,12 +34,12 @@ export default function LoginForm() {
         alt="Schoters by Ruangguru"
         width={220}
         height={62}
-        className="relative z-10 top-2 mb-4 h-14 w-auto"
+        className="relative z-10 top-2 mb-4 h-12 sm:h-14 w-auto"
         priority
       />
 
       {/* CARD FORM LOGIN - compact, tidak sampai bawah */}
-      <div className="relative z-10 mt-4 w-full max-w-md mx-4 rounded-3xl bg-white px-8 py-6 shadow-2xl sm:px-10">
+      <div className="relative z-10 mt-4 w-full max-w-md mx-4 sm:mx-6 rounded-3xl bg-white px-6 py-6 shadow-2xl sm:px-10">
         <div className="mb-5 text-left">
           <a
             href="/"
@@ -48,7 +48,7 @@ export default function LoginForm() {
             <ArrowLeft className="h-4 w-4" />
             Kembali
           </a>
-          <h1 className="text-3xl font-bold tracking-tight text-[#052e67]">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#052e67]">
             Welcome back! 👋
           </h1>
           <p className="mt-1.5 text-sm text-slate-500">
