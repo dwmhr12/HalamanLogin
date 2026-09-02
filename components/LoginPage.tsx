@@ -97,7 +97,7 @@ export default function LoginPage() {
             <div className="w-full lg:flex-1 text-center lg:text-left">
               <h1
                 className="font-extrabold leading-snug text-white"
-                style={{ fontSize: "clamp(1.9rem, 5.2vh, 4rem)" }}
+                style={{ fontSize: "clamp(1.85rem, 5vh, 3.9rem)" }}
               >
                 Wujudkan Impian Globalmu
                 <span className="block mt-1 text-[#129cfc]">Bersama Schoters</span>
@@ -105,7 +105,7 @@ export default function LoginPage() {
 
               <p
                 className="mt-[min(2vh,1.25rem)] text-slate-200 mx-auto lg:mx-0"
-                style={{ fontSize: "clamp(1.05rem, 2.7vh, 1.4rem)", maxWidth: "40rem" }}
+                style={{ fontSize: "clamp(1.02rem, 2.62vh, 1.36rem)", maxWidth: "40rem" }}
               >
                 Akses berbagai program Schoters yang mendukung perjalanan kuliah,
                 karier, akademik, dan pengembangan dirimu.
@@ -113,27 +113,27 @@ export default function LoginPage() {
 
               <div
                 className="flex flex-wrap justify-center lg:justify-start mx-auto lg:mx-0"
-                style={{ marginTop: "min(3.5vh, 2.5rem)", gap: "min(2.4vh, 1.75rem)", maxWidth: "40rem" }}
+                style={{ marginTop: "min(3.35vh, 2.35rem)", gap: "min(2.3vh, 1.65rem)", maxWidth: "40rem" }}
               >
                 {features.map((f) => (
-                  <div key={f.label} className="flex flex-col items-center gap-2" style={{ width: "7rem" }}>
+                  <div key={f.label} className="flex flex-col items-center gap-2" style={{ width: "6.75rem" }}>
                     <div
                       className="flex items-center justify-center rounded-full shrink-0"
                       style={{
                         backgroundColor: f.bg,
-                        width: "clamp(3.5rem, 8.2vh, 6.25rem)",
-                        height: "clamp(3.5rem, 8.2vh, 6.25rem)",
+                        width: "clamp(3.35rem, 7.9vh, 6rem)",
+                        height: "clamp(3.35rem, 7.9vh, 6rem)",
                       }}
                     >
                       <f.icon
                         className="text-white"
                         style={{
-                          width: f.big ? "clamp(1.8rem, 4.4vh, 3.1rem)" : "clamp(1.4rem, 3.5vh, 2.5rem)",
-                          height: f.big ? "clamp(1.8rem, 4.4vh, 3.1rem)" : "clamp(1.4rem, 3.5vh, 2.5rem)",
+                          width: f.big ? "clamp(1.72rem, 4.2vh, 2.98rem)" : "clamp(1.35rem, 3.35vh, 2.4rem)",
+                          height: f.big ? "clamp(1.72rem, 4.2vh, 2.98rem)" : "clamp(1.35rem, 3.35vh, 2.4rem)",
                         }}
                       />
                     </div>
-                    <p className="text-center text-white leading-snug" style={{ fontSize: "clamp(0.82rem, 2.1vh, 1.1rem)" }}>
+                    <p className="text-center text-white leading-snug" style={{ fontSize: "clamp(0.79rem, 2.02vh, 1.06rem)" }}>
                       {f.label}
                     </p>
                   </div>
