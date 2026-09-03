@@ -97,7 +97,7 @@ export default function LoginPage() {
             <div className="w-full lg:flex-1 text-center lg:text-left">
               <h1
                 className="font-extrabold leading-snug text-white"
-                style={{ fontSize: "clamp(1.85rem, 5vh, 3.9rem)" }}
+                style={{ fontSize: "clamp(1.78rem, 4.85vh, 3.78rem)" }}
               >
                 Wujudkan Impian Globalmu
                 <span className="block mt-1 text-[#129cfc]">Bersama Schoters</span>
@@ -105,7 +105,7 @@ export default function LoginPage() {
 
               <p
                 className="mt-[min(2vh,1.25rem)] text-slate-200 mx-auto lg:mx-0"
-                style={{ fontSize: "clamp(1.02rem, 2.62vh, 1.36rem)", maxWidth: "40rem" }}
+                style={{ fontSize: "clamp(1rem, 2.54vh, 1.32rem)", maxWidth: "40rem" }}
               >
                 Akses berbagai program Schoters yang mendukung perjalanan kuliah,
                 karier, akademik, dan pengembangan dirimu.
@@ -133,7 +133,7 @@ export default function LoginPage() {
                         }}
                       />
                     </div>
-                    <p className="text-center text-white leading-snug" style={{ fontSize: "clamp(0.79rem, 2.02vh, 1.06rem)" }}>
+                    <p className="text-center text-white leading-snug" style={{ fontSize: "clamp(0.78rem, 1.97vh, 1.03rem)" }}>
                       {f.label}
                     </p>
                   </div>
