@@ -146,14 +146,15 @@ export default function WelcomeScreen() {
         ref={programSectionRef}
         className="relative z-10 flex-1 w-full bg-[#f6f8fb] px-6 pt-2 pb-8 sm:px-20 sm:pt-4 sm:pb-10"
       >
-        {/* GRID 4 KARTU PROGRAM */}
-        <div className="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* GRID 3 KARTU PROGRAM - items-stretch supaya tinggi kartu sejajar */}
+        <div className="mt-2 mx-auto grid max-w-5xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10 items-stretch justify-items-center">
           <ProgramCard
             image="/BG-SA.png"
             icon="/icon1.png"
             title="Study Abroad Academy"
             description="Program bimbingan intensif untuk yang ingin S1/S2/S3 di luar negeri"
             iconSize={44}
+            progress={65}
           />
           <ProgramCard
             image="/BG-SA.png"
@@ -165,17 +166,11 @@ export default function WelcomeScreen() {
           />
           <ProgramCard
             image="/BG-SA.png"
-            icon="/icon3.png"
-            title="Alta Global School (AGS)"
-            description="Sekolah PAUD-SMA Online/Hybrid dengan kurikulum nasional dan internasional"
-            color="#6a53e6"
-          />
-          <ProgramCard
-            image="/BG-SA.png"
             icon="/icon4.png"
             title="Style Edutrip"
             description="Program EduTrip internasional ke kampus top dan industri ternama luar negeri"
             color="#fc7f05"
+            progress={20}
           />
         </div>
 
