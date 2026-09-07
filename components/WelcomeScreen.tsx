@@ -46,7 +46,7 @@ export default function WelcomeScreen() {
     });
   };
 
-  // Auto-scroll otomatis ke daftar program beberapa detik setelah halaman dibuka
+  // Auto-scroll otomatis ke daftar program 1 detik setelah halaman dibuka
   useEffect(() => {
     const timer = setTimeout(() => {
       handleScrollDown();
@@ -135,9 +135,9 @@ export default function WelcomeScreen() {
           type="button"
           onClick={handleScrollDown}
           aria-label="Scroll ke daftar program"
-          className="group absolute bottom-6 left-1/2 z-20 flex h-10 w-10 -translate-x-1/2 animate-bounce items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition hover:bg-white/25 sm:bottom-8"
+          className="group absolute bottom-6 left-1/2 z-20 flex h-12 w-12 -translate-x-1/2 animate-bounce items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition hover:bg-white/25 sm:bottom-8"
         >
-          <ChevronDown className="h-5 w-5" />
+          <ChevronDown className="h-7 w-7" />
         </button>
       </section>
 
