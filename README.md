@@ -1,25 +1,3 @@
-# Schoters Login Page
-
-Halaman login bergaya Schoters, dibangun dengan **Next.js 14 (App Router)**, **TypeScript**, dan **Tailwind CSS**.
-
-## Struktur folder
-
-```
-schoters-login/
-├─ app/
-│  ├─ layout.tsx        # root layout + font
-│  ├─ page.tsx           # halaman login (menggabungkan 2 komponen di bawah)
-│  └─ globals.css        # tailwind base styles
-├─ components/
-│  ├─ IllustrationPanel.tsx  # panel kiri: logo, headline, ilustrasi SVG, badge fitur
-│  └─ LoginCard.tsx          # panel kanan: form email/password, tombol sosial
-├─ public/
-├─ package.json
-├─ tailwind.config.ts
-├─ tsconfig.json
-└─ next.config.mjs
-```
-
 ## Menjalankan secara lokal
 
 ```bash
