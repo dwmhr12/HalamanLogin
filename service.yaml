@@ -1,0 +1,15 @@
+apiVersion: v1
+service: schoters-portal-login
+stack: nextjs
+description: Schoters Student Portal - halaman login dan bridge pilih program
+team: schoters
+ignorePath:
+  - node_modules
+  - .next
+  - _caches
+  - .env*
+  - .yarn
+owners:
+  - yulindo@schoters.com
+countries:
+  - id
