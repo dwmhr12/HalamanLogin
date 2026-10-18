@@ -1,64 +1,16 @@
-import { AppNotification } from "./notifications";
+// `image` opsional: foto cadangan untuk user yang tidak punya foto Google
+// (mis. login email/password). User Google memakai foto dari sesi.
+export type User = { id: string; email: string; name: string; image?: string | null };
 
-export interface User {
-  name: string;
-  studentId: string;
-  memberTier: string;
-  avatarUrl?: string;
+export interface UserRepository {
+  findByEmail(email: string): Promise<User | null>;
+  verifyPassword(email: string, password: string): Promise<User | null>;
 }
 
-export interface ProgressStat {
-  id: string;
-  label: string;
-  value: number;
-  icon: string;
-  color: string;
-}
+// Program yang boleh dibuka seorang user + progress belajarnya (0-100).
+// Program yang tidak ada di daftar ini dianggap terkunci.
+export type UserProgram = { programId: string; progress: number };
 
-export interface NextAction {
-  id: string;
-  label: string;
-  icon: string;
-  color: string;
-}
-
-export interface ScheduleEvent {
-  id: string;
-  date: string;
-  startTime: string;
-  endTime: string;
-  title: string;
-  location: string;
-  mode: string;
-  icon: string;
-}
-
-export interface Deadline {
-  id: string;
-  title: string;
-  subtitle: string;
-  date: string;
-  daysLeft: number;
-  type: string;
-}
-
-export interface TargetProgram {
-  id: string;
-  category: string;
-  title: string;
-  country: string;
-  semester: string;
-  status: string;
-  deadline: string;
-  readiness: number;
-}
-
-export interface DashboardData {
-  user: User;
-  notifications: AppNotification[];
-  progressStats: ProgressStat[];
-  nextActions: NextAction[];
-  scheduleEvents: ScheduleEvent[];
-  deadlines: Deadline[];
-  targetPrograms: TargetProgram[];
+export interface ProgramRepository {
+  getUserPrograms(userId: string): Promise<UserProgram[]>;
 }

@@ -12,6 +12,10 @@ interface ProgramCardProps {
   color?: string;
   locked?: boolean;
   iconSize?: number;
+  /** Logo program yang ditimpa di atas gambar (mis. "/SA_biru.png"). */
+  logo?: string;
+  /** Tinggi logo dalam px. Atur per program kalau ukuran file logonya beda-beda. */
+  logoHeight?: number;
   /** Progres belajar dalam persen (0-100). Kalau diisi, progress bar akan tampil. */
   progress?: number;
   /** Teks tombol aksi utama (kartu yang tidak terkunci). */
@@ -27,6 +31,8 @@ export default function ProgramCard({
   color = "#0e53e4",
   locked = false,
   iconSize = 26,
+  logo,
+  logoHeight = 36,
   progress,
   ctaLabel,
 }: ProgramCardProps) {
@@ -43,11 +49,14 @@ export default function ProgramCard({
           yang bakal keliatan, karena card putih di bawah bakal naik dan
           nutupin sebagian bawahnya (overlap). */}
       <div className="relative h-40 w-full shrink-0 overflow-hidden">
+        {/* Gambar di-blur tipis. scale-105 supaya pinggiran yang ikut ngeblur
+            tidak kelihatan (kepotong overflow-hidden). Ubah blur-[1.5px] untuk
+            atur seberapa blur (mis. blur-[1px] lebih jelas, blur-[3px] lebih blur). */}
         <Image
           src={image}
-          alt={title}
+          alt=""
           fill
-          className={`object-cover ${locked ? "grayscale" : ""}`}
+          className={`scale-105 object-cover blur-[1.5px] ${locked ? "grayscale" : ""}`}
         />
         {/* TINT WARNA - cuma nempel di gambar, sesuai warna masing-masing kartu */}
         {!locked && (
@@ -55,6 +64,23 @@ export default function ProgramCard({
             className="pointer-events-none absolute inset-0 mix-blend-color"
             style={{ backgroundColor: color, opacity: 0.55 }}
           />
+        )}
+
+        {/* LOGO PROGRAM - ditimpa di tengah area gambar yang kelihatan.
+            bottom-6 = menyisakan ruang buat card putih yang naik menutupi
+            bagian bawah gambar, supaya logo benar-benar di tengah area yang terlihat.
+            Tanpa background, logo langsung menimpa gambar. */}
+        {logo && (
+          <div className="pointer-events-none absolute inset-x-0 top-0 bottom-6 flex items-center justify-center">
+            <Image
+              src={logo}
+              alt={`Logo ${title}`}
+              width={200}
+              height={logoHeight}
+              className={`object-contain ${locked ? "opacity-70 grayscale" : ""}`}
+              style={{ height: logoHeight, width: "auto" }}
+            />
+          </div>
         )}
 
         {/* BADGE POJOK KANAN ATAS */}
@@ -127,7 +153,7 @@ export default function ProgramCard({
                 </div>
               </div>
 
-              {/* TOMBOL "Buka Akses" - baru, mengarahkan ke halaman berlangganan */}
+              {/* TOMBOL "Buka Akses" - mengarahkan ke halaman berlangganan */}
               <a
                 href={href}
                 className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-[#EDEBFB] px-4 py-2.5 text-sm font-semibold text-[#5B4FE0] transition hover:bg-[#e2ddfa]"
