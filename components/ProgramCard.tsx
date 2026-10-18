@@ -9,6 +9,7 @@ interface ProgramCardProps {
   title: string;
   description: string;
   href?: string;
+  /** Warna aksen program (ikon, progress, tombol). Kartu terkunci tetap abu-abu. */
   color?: string;
   locked?: boolean;
   iconSize?: number;
@@ -36,6 +37,7 @@ export default function ProgramCard({
   progress,
   ctaLabel,
 }: ProgramCardProps) {
+  const ACCENT = color;
   const showProgress = !locked && typeof progress === "number";
   // Label tombol otomatis: belum mulai (0% / belum ada data) -> "Mulai Belajar",
   // sudah jalan (progress > 0%) -> "Lanjutkan Program". Bisa di-override manual lewat prop ctaLabel.
@@ -44,32 +46,24 @@ export default function ProgramCard({
 
   return (
     <div className="flex h-full w-72 flex-col overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-slate-100 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg">
-      {/* GAMBAR ATAS - full di belakang, dikasih tint warna sesuai warna
-          kartu (biru/oranye). Tingginya sengaja dibikin lebih dari area
-          yang bakal keliatan, karena card putih di bawah bakal naik dan
-          nutupin sebagian bawahnya (overlap). */}
+      {/* GAMBAR ATAS - full di belakang, tanpa tint warna. Tingginya sengaja
+          dibikin lebih dari area yang bakal keliatan, karena card putih di bawah
+          bakal naik dan nutupin sebagian bawahnya (overlap). */}
       <div className="relative h-40 w-full shrink-0 overflow-hidden">
         {/* Gambar di-blur tipis. scale-105 supaya pinggiran yang ikut ngeblur
-            tidak kelihatan (kepotong overflow-hidden). Ubah blur-[1.5px] untuk
-            atur seberapa blur (mis. blur-[1px] lebih jelas, blur-[3px] lebih blur). */}
+            tidak kelihatan (kepotong overflow-hidden). */}
         <Image
           src={image}
           alt=""
           fill
-          className={`scale-105 object-cover blur-[1.5px] ${locked ? "grayscale" : ""}`}
+          className={`scale-105 object-cover blur-[2px] ${
+            locked ? "grayscale" : "brightness-[0.6] saturate-110"
+          }`}
         />
-        {/* TINT WARNA - cuma nempel di gambar, sesuai warna masing-masing kartu */}
-        {!locked && (
-          <div
-            className="pointer-events-none absolute inset-0 mix-blend-color"
-            style={{ backgroundColor: color, opacity: 0.55 }}
-          />
-        )}
 
         {/* LOGO PROGRAM - ditimpa di tengah area gambar yang kelihatan.
             bottom-6 = menyisakan ruang buat card putih yang naik menutupi
-            bagian bawah gambar, supaya logo benar-benar di tengah area yang terlihat.
-            Tanpa background, logo langsung menimpa gambar. */}
+            bagian bawah gambar. */}
         {logo && (
           <div className="pointer-events-none absolute inset-x-0 top-0 bottom-6 flex items-center justify-center">
             <Image
@@ -77,7 +71,9 @@ export default function ProgramCard({
               alt={`Logo ${title}`}
               width={200}
               height={logoHeight}
-              className={`object-contain ${locked ? "opacity-70 grayscale" : ""}`}
+              className={`object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] ${
+                locked ? "opacity-70 grayscale" : ""
+              }`}
               style={{ height: logoHeight, width: "auto" }}
             />
           </div>
@@ -91,17 +87,13 @@ export default function ProgramCard({
         )}
       </div>
 
-      {/* CARD PUTIH - ditarik naik (-mt-6) supaya nutupin bagian bawah
-          gambar, sudut atasnya dibulatin (rounded-t-2xl) biar keliatan
-          "naik menutupi" foto, bukan cuma nempel rapi di bawahnya. */}
+      {/* CARD PUTIH - ditarik naik (-mt-6) supaya nutupin bagian bawah gambar. */}
       <div className="relative z-10 -mt-6 flex flex-1 flex-col rounded-t-2xl bg-white">
-        {/* IKON - ngambang di persimpangan gambar & card putih, absolute
-            ditarik ke atas dari tepi card ini supaya separuh nutup foto,
-            separuh nutup putih. Ring putih biar keliatan bersih/floating. */}
+        {/* IKON - ngambang di persimpangan gambar & card putih. */}
         <div className="relative px-5">
           <div
             className="absolute -top-6 flex h-12 w-12 items-center justify-center rounded-xl ring-4 ring-white"
-            style={{ backgroundColor: locked ? "#EEF0F4" : color }}
+            style={{ backgroundColor: locked ? "#EEF0F4" : ACCENT }}
           >
             {locked ? (
               <Lock className="h-6 w-6 text-slate-400" />
@@ -118,8 +110,7 @@ export default function ProgramCard({
           </div>
         </div>
 
-        {/* KONTEN - teks rata kiri, dikasih jarak atas ekstra (pt) supaya
-            nggak ketimpa ikon yang ngambang di atasnya */}
+        {/* KONTEN - teks rata kiri */}
         <div className="flex flex-1 flex-col justify-between px-5 pb-4 pt-7 text-left">
           <div>
             <h3
@@ -140,7 +131,7 @@ export default function ProgramCard({
 
           {locked ? (
             <div className="mt-4">
-              {/* KOTAK "Program premium" - pengganti pill "Terkunci" polos */}
+              {/* KOTAK "Program premium" */}
               <div className="flex items-center gap-2 rounded-xl bg-slate-50 px-4 py-3">
                 <Lock className="h-4 w-4 shrink-0 text-slate-400" />
                 <div>
@@ -169,14 +160,14 @@ export default function ProgramCard({
                 <div className="mb-4">
                   <div className="mb-1.5 flex items-center justify-between text-xs font-semibold">
                     <span className="text-slate-500">Progress Kamu</span>
-                    <span style={{ color }}>{progress}%</span>
+                    <span style={{ color: ACCENT }}>{progress}%</span>
                   </div>
                   <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
                     <div
                       className="h-full rounded-full transition-all duration-500"
                       style={{
                         width: `${Math.min(100, Math.max(0, progress ?? 0))}%`,
-                        backgroundColor: color,
+                        backgroundColor: ACCENT,
                       }}
                     />
                   </div>
@@ -186,7 +177,7 @@ export default function ProgramCard({
               <a
                 href={href}
                 className="flex w-full items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-white transition hover:brightness-110"
-                style={{ backgroundColor: color }}
+                style={{ backgroundColor: ACCENT }}
               >
                 {resolvedCtaLabel}
                 <ArrowRight className="h-4 w-4" />

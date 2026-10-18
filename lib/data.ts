@@ -48,7 +48,7 @@ export async function updateUserImage(userId: string, image: string): Promise<vo
 // Program yang tidak ada di sini = terkunci.
 // id program: "sa" = Study Abroad, "wa" = Work Abroad, "style" = Style Edutrip
 const ACCESS: Record<string, Record<string, { progress: number }>> = {
-  "1": { sa: { progress: 65 }, style: { progress: 20 } },
+  "1": { sa: { progress: 65 }, wa: { progress: 65 }, style: { progress: 20 } },
   "2": { sa: { progress: 0 } },
 };
 
